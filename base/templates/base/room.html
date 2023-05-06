@@ -1,5 +1,10 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<h1>Room page</h1>
+<ul>
+    {% for room in rooms %}
+    <li>{{room.name}}</li>
+    <li>{{room.description}}</li>
+    {% endfor %}
+</ul>
 {% endblock content %}
