@@ -11,3 +11,7 @@ class Room(models.Model):
 
     def __str__(self):
         return self.name
+
+class Message(models.Model):
+
+    room = models.Foreignkey(Room, on_delete = models.SET_NULL)
