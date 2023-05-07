@@ -2,8 +2,13 @@
 
 {% block content %}
 <h1>Home page</h1>
-{% for room in rooms %}
-    <li>{{room.name}}</li>
-    <li>{{room.description}}</li>
-    {% endfor %}
+<div>
+    {% for room in rooms %}
+    <div>
+        <span>@{{room.host.username}}</span>
+            <li>{{room.name}}</li>
+            <div>{{room.topic.name}}</div><br>
+        </div><hr><br>
+        {% endfor %}
+</div>
 {% endblock content %}
