@@ -14,9 +14,9 @@ class Topic(models.Model):
 class Room(models.Model):
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=20)
-    description = models.TextField()
     # participants = 
     topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
+    description = models.TextField()
 
     updated_at =  models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
