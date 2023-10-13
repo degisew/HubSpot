@@ -4,7 +4,7 @@
 <h1>Home Page</h1>
 {% for room in rooms %}
 <div>
-  <a href="/room/{{room.id}}"><h2>{{room.name}}</h2></a>
+  <a href="{% url 'room' room.id %}"><h2>{{room.name}}</h2></a>
 </div>
 {% endfor %} 
 {% endblock %}
