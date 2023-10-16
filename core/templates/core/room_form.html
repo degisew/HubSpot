@@ -1,6 +1,7 @@
 {% extends 'index.html' %}
 {% block content %} 
  {% csrf_token %}
-<label for="name"><input type="text" name="name" /></label>
-<input type="submit" value="submit" />
+ {{form.as_p}}
+<!-- <label for="name"><input type="text" name="name" /></label>
+<input type="submit" value="submit" /> -->
 {% endblock%}
