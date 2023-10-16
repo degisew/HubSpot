@@ -20,3 +20,14 @@ def create_room(request):
             return redirect('home')
 
     return render(request, 'core/room_form.html', {'form':form})
+
+
+def update_room(request, pk):
+    room = Room.objects.get(id=pk)
+    form = RoomForm(instance=room)
+    if request.method == 'POST':
+        form = RoomForm(request.POST, instance=room)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    return render(request, 'core/room_form.html', {'form': form})
