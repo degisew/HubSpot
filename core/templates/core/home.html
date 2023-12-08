@@ -3,16 +3,23 @@
 {% block content%}
 <h1>Home Page</h1>
 
-{% for room in rooms %}
-<div>
-  <a href="{% url 'create-room' %}">Create Room</a>
-  <a href="{% url 'update-room' room.id %}">Edit</a>
-  <a href="{% url 'Delete-room' room.id %}">Delete</a>
+<div class="home-container">
+  <div class="side-bar">
+    <h3>Browse Topics</h3>
+  </div>
+  <div>
+    <a href="{% url 'create-room' %}">Create Room</a>
+    <div>
+      {% for room in rooms %}
+      <div>
+        <a href="{% url 'update-room' room.id %}">Edit</a>
+        <a href="{% url 'Delete-room' room.id %}">Delete</a>
+        <span>@{{room.host.username}}</span>
+        <a href="{% url 'room' room.id %}"><h2>{{room.name}}</h2></a>
+        <small>{{room.topic.name}}</small>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </div>
-<div>
-  <span>@{{room.host.username}}</span>
-  <a href="{% url 'room' room.id %}"><h2>{{room.name}}</h2></a>
-  <small>{{room.topic.name}}</small>
-</div>
-{% endfor %} 
 {% endblock %}
