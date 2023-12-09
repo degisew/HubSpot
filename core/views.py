@@ -31,3 +31,14 @@ def update_room(request, pk):
             form.save()
             return redirect('home')
     return render(request, 'core/room_form.html', {'form': form})
+
+
+def delete_room(request, pk):
+    room = Room.objects.get(id=pk)
+    print(room)
+    
+    if request.method == 'POST':
+        print('Hello')
+        room.delete()
+        return redirect('home')
+    return render(request, 'core/delete.html', {'room': room})
