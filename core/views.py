@@ -1,10 +1,11 @@
 from django.shortcuts import redirect, render
-from .models import Room
+from .models import Room, Topic
 from .forms import RoomForm
 
 def home(request):
     rooms = Room.objects.order_by('-created_at').all()
-    return render(request, 'core/home.html', {'rooms': rooms})
+    topics = Topic.objects.all()
+    return render(request, 'core/home.html', {'rooms': rooms, 'topics': topics})
 
 
 def room(request, pk):
