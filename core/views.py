@@ -3,7 +3,9 @@ from .models import Room, Topic
 from .forms import RoomForm
 
 def home(request):
-    rooms = Room.objects.order_by('-created_at').all()
+    QS = request.GET.get('qs')
+    query_string = QS if QS != None else ''
+    rooms = Room.objects.order_by('-created_at').select_related('topic').filter(topic__name__icontains=query_string)
     topics = Topic.objects.all()
     return render(request, 'core/home.html', {'rooms': rooms, 'topics': topics})
 
