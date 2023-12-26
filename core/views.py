@@ -1,4 +1,6 @@
 from django.shortcuts import redirect, render
+from django.contrib import messages
+from django.contrib.auth import models, login, logout, authenticate
 from django.db.models import Q
 from .models import Room, Topic
 from .forms import RoomForm
@@ -15,7 +17,22 @@ def home(request):
     room_count = rooms.count()
     return render(request, 'core/home.html', {'rooms': rooms, 'topics': topics, 'room_count': room_count})
 
+def login_page(request):
+    post_data = request.POST
+    username = post_data.get('username')
+    password = post_data.get('password')
 
+    try:
+        user = models.User.objects.get(username=username)
+    except:
+        messages.error(request, "User not found.")
+        
+    auth_user = authenticate(request, username=username, password=password)
+    if auth_user is not None:
+            login(request, auth_user)
+            messages.success(request, 'Login success.')
+            return redirect('home')
+    return render(request, 'core/login.html')
 
 def room(request, pk):
     room = Room.objects.get(id=pk)
