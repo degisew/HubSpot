@@ -26,13 +26,17 @@ def login_page(request):
         user = models.User.objects.get(username=username)
     except:
         messages.error(request, "User not found.")
-        
-    auth_user = authenticate(request, username=username, password=password)
-    if auth_user is not None:
-            login(request, auth_user)
-            messages.success(request, 'Login success.')
-            return redirect('home')
+
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return redirect('home')
     return render(request, 'core/login.html')
+
+def logout_page(request):     
+    logout(request)
+    return redirect('login')
+
 
 def room(request, pk):
     room = Room.objects.get(id=pk)
