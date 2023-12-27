@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms  import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import models, login, logout, authenticate
 from django.db.models import Q
@@ -36,6 +37,12 @@ def login_page(request):
         login(request, user)
         return redirect('home')
     return render(request, 'core/login.html')
+
+
+def register_page(request):
+    form = UserCreationForm()
+    context = {'form': form}
+    return render(request, 'core/register.html', context)
 
 def logout_page(request):     
     logout(request)
