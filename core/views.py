@@ -20,6 +20,8 @@ def home(request):
     return render(request, 'core/home.html', {'rooms': rooms, 'topics': topics, 'room_count': room_count})
 
 def login_page(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     post_data = request.POST
     username = post_data.get('username')
     password = post_data.get('password')
@@ -72,6 +74,8 @@ def update_room(request, pk):
 def delete_room(request, pk):
     room = Room.objects.get(id=pk)
     print(room)
+    if request.user != room.host:
+        return HttpResponse("You're not allowed")
     
     if request.method == 'POST':
         print('Hello')
