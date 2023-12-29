@@ -1,2 +1,2 @@
 ## DISCORD CLONE
-A discord like application built with django,and postgres.
+A real-time chat application using Django and Python, inspired by Discord. This project aims to replicate some of the key features of Discord, allowing users to create and join chat rooms, send and receive messages in real-time, and manage user accounts. Implemented features such as text messaging, user authentication, roles, and permissions.
