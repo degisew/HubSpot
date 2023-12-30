@@ -62,7 +62,9 @@ def logout_page(request):
 
 def room(request, pk):
     room = Room.objects.get(id=pk)
-    return render(request, 'core/room.html', {'room': room})
+    room_messages = room.message_set.all()
+    print('***********************', room_messages)
+    return render(request, 'core/room.html', {'room': room, 'room_messages': room_messages})
 
 @login_required(login_url='login')
 def create_room(request):

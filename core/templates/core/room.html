@@ -2,4 +2,13 @@
 
 {% block content %}
     <h3>{{room}}</h3>
+    <p>{{room.description}}</p>
+
+    <div class="message-container">
+        {% for message in room_messages  %}
+        <small>{{message.user}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Posted {{message.created_at|timesince}} ago</small>
+        <br>
+        <p>{{message.body}}</p>
+        {% endfor %}
+    </div>
 {% endblock %}
