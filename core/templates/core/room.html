@@ -11,4 +11,13 @@
         <p>{{message.body}}</p>
         {% endfor %}
     </div>
+
+
+   <div class="comment-form">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="add comments"/>
+        <input type="submit" name="comment" value="Comment"/>
+    </form>
+   </div>
 {% endblock %}

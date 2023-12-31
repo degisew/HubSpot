@@ -62,8 +62,10 @@ def logout_page(request):
 
 def room(request, pk):
     room = Room.objects.get(id=pk)
-    room_messages = room.message_set.all()
-    print('***********************', room_messages)
+    room_messages = room.message_set.all().order_by('-created_at')
+    if request.method == 'POST':
+        comment = request.POST.get('comment')
+    
     return render(request, 'core/room.html', {'room': room, 'room_messages': room_messages})
 
 @login_required(login_url='login')
