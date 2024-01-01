@@ -1,6 +1,15 @@
 {% extends 'index.html' %} 
 
+
 {% block content %}
+<style>
+    .main-container {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+    }
+</style>
+<div class="main-container">
+    <div class="room-container">
     <h3>{{room}}</h3>
     <p>{{room.description}}</p>
 
@@ -21,4 +30,9 @@
     </form>
 </div>
 {% endif %}
+</div>
+<div class="participants">
+    <h2>participants</h2>
+</div>
+</div>
 {% endblock %}
