@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms  import UserCreationForm
 from django.contrib import messages
@@ -61,17 +62,19 @@ def logout_page(request):
 
 
 def room(request, pk):
-    room = Room.objects.get(id=pk)
-    room_messages = room.message_set.all().order_by('-created_at')
-    if request.method == 'POST':
-        Message.objects.create(
-            user = request.user,
-            room = room,
-            body = request.POST.get('body')
+    try:
+        room = Room.objects.get(id=pk)
+        room_messages = room.messages.all().order_by('-created_at')
+        if request.method == 'POST':
+            Message.objects.create(
+                user = request.user,
+                room = room,
+                body = request.POST.get('body')
 
-        )
-        return redirect('room', pk=room.id)
-    
+            )
+            return redirect('room', pk=room.id)
+    except Room.DoesNotExist:
+            raise ObjectDoesNotExist("Room doesn't exist")
     return render(request, 'core/room.html', {'room': room, 'room_messages': room_messages})
 
 @login_required(login_url='login')
