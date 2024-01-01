@@ -33,6 +33,11 @@
 </div>
 <div class="participants">
     <h2>participants</h2>
+    <div>
+    {% for user in participants %}
+    <a>@{{user.username}}</a><br><br>
+    {% endfor %}
+    </div>
 </div>
 </div>
 {% endblock %}

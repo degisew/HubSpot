@@ -65,6 +65,9 @@ def room(request, pk):
     try:
         room = Room.objects.get(id=pk)
         room_messages = room.messages.all().order_by('-created_at')
+        participants = room.participants.all()
+        print('###############', participants)
+        context = {'room': room, 'room_messages': room_messages, 'participants': participants}
         if request.method == 'POST':
             Message.objects.create(
                 user = request.user,
@@ -75,7 +78,7 @@ def room(request, pk):
             return redirect('room', pk=room.id)
     except Room.DoesNotExist:
             raise ObjectDoesNotExist("Room doesn't exist")
-    return render(request, 'core/room.html', {'room': room, 'room_messages': room_messages})
+    return render(request, 'core/room.html', context)
 
 @login_required(login_url='login')
 def create_room(request):
