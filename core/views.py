@@ -107,12 +107,21 @@ def update_room(request, pk):
 @login_required(login_url='login')
 def delete_room(request, pk):
     room = Room.objects.get(id=pk)
-    print(room)
     if request.user != room.host:
         return HttpResponse("You're not allowed")
     
     if request.method == 'POST':
-        print('Hello')
         room.delete()
         return redirect('home')
-    return render(request, 'core/delete.html', {'room': room})
+    return render(request, 'core/delete.html', {'data': room})
+
+
+def delete_message(request, pk):
+    try:
+        message = Message.objects.get(id=pk)
+        if request.method == 'POST':
+            message.delete()
+            return redirect('home')
+    except Message.DoesNotExist:
+        raise ObjectDoesNotExist('Message not found.')
+    return render(request, 'core/delete.html', {'data': message})
