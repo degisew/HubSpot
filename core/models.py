@@ -8,8 +8,8 @@ class Topic(models.Model):
         return self.name
     
 class Room(models.Model):
-    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='host')
-    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True, related_name='topic')
+    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='room')
+    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True, related_name='room')
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     participants = models.ManyToManyField(User, blank=True, related_name='participants')

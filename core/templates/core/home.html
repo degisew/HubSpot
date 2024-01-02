@@ -10,37 +10,15 @@
 </style>
 <div class="home-container">
   <div class="side-bar">
-    <h3>Browse Topics</h3>
-    {% for topic in topics %}
-    <div>
-      <a href="{% url 'home'%}?qs={{topic.name}}">{{topic.name}}</a>
-    </div>
-    {% endfor %}
+    {% include "core/topics.html" %}
   </div>
   <div>
     <h5>{{room_count}} rooms available</h5>
     <a href="{% url 'create-room' %}">Create Room</a>
-    <div>
-      {% for room in rooms %}
-      <div>
-        {% if request.user == room.host %}
-        <a href="{% url 'update-room' room.id %}">Edit</a>
-        <a href="{% url 'delete-room' room.id %}">Delete</a>
-        {% endif %}
-        <span>@{{room.host.username}}</span>
-        <a href="{% url 'room' room.id %}"><h2>{{room.name}}</h2></a>
-        <small>{{room.topic.name}}</small>
-      </div>
-      {% endfor %}
-    </div>
+    {% include "core/feed.html" %}
   </div>
   <div>
-    <h3>Recent Activity</h3>
-    {% for message in room_messages %}
-      <p>@{{message.user}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{message.created_at|timesince}}</p>
-      <small>replied to "{{message.room}}"</small>
-      <p>{{message.body}}</p>
-    {% endfor %}
+  {% include "core/activity.html" %}
   </div>
 </div>
 {% endblock %}
