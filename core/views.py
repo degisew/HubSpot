@@ -27,10 +27,10 @@ def home(request):
 def user_profile(request, pk):
     try:
         user = User.objects.get(id=pk)
-
+        rooms = User.room.all()
     except User.DoesNotExist:
         raise ObjectDoesNotExist('User not found.')
-    context = {'user': user}
+    context = {'user': user, 'rooms': rooms}
     return render(request, 'core/user_profile.html', context)
 
 def login_page(request):
