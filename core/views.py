@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
@@ -22,6 +23,15 @@ def home(request):
     room_messages = Message.objects.filter(Q(room__topic__name__icontains=query_string)).order_by('-created_at')
     context = {'rooms': rooms, 'topics': topics, 'room_count': room_count, 'room_messages': room_messages}
     return render(request, 'core/home.html', context)
+
+def user_profile(request, pk):
+    try:
+        user = User.objects.get(id=pk)
+
+    except User.DoesNotExist:
+        raise ObjectDoesNotExist('User not found.')
+    context = {'user': user}
+    return render(request, 'core/user_profile.html', context)
 
 def login_page(request):
     if request.user.is_authenticated:
