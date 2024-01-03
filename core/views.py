@@ -35,45 +35,6 @@ def user_profile(request, pk):
     context = {'user': user, 'rooms': rooms, 'room_messages': room_messages, 'topics': topics}
     return render(request, 'core/user_profile.html', context)
 
-def login_page(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-    post_data = request.POST
-    username = post_data.get('username')
-    password = post_data.get('password')
-
-    try:
-        user = models.User.objects.get(username=username)
-    except:
-        messages.error(request, "User not found.")
-
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        return redirect('home')
-    return render(request, 'core/login.html')
-
-
-def register_page(request):
-    form = UserCreationForm()
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.error(request, 'An error occurred.')
-
-    context = {'form': form}
-    return render(request, 'core/register.html', context)
-
-def logout_page(request):     
-    logout(request)
-    return redirect('login')
-
 
 def room(request, pk):
     try:
@@ -100,7 +61,9 @@ def create_room(request):
     if request.method == 'POST':
         form = RoomForm(request.POST)
         if form.is_valid():
-            form.save()
+            room = form.save(commit=False) # get a form instance
+            room.host = request.user
+            room.save()
             return redirect('home')
 
     return render(request, 'core/room_form.html', {'form':form})
@@ -139,3 +102,43 @@ def delete_message(request, pk):
     except Message.DoesNotExist:
         raise ObjectDoesNotExist('Message not found.')
     return render(request, 'core/delete.html', {'data': message})
+
+
+def login_page(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    post_data = request.POST
+    username = post_data.get('username')
+    password = post_data.get('password')
+
+    try:
+        user = models.User.objects.get(username=username)
+    except:
+        messages.error(request, "User not found.")
+
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return redirect('home')
+    return render(request, 'core/login.html')
+
+
+def register_page(request):
+    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'An error occurred.')
+
+    context = {'form': form}
+    return render(request, 'core/register.html', context)
+
+def logout_page(request):     
+    logout(request)
+    return redirect('login')

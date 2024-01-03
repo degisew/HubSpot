@@ -4,5 +4,5 @@ from .models import Room
 class RoomForm(ModelForm):
     class Meta:
         model = Room
-        fields = ['host', 'topic', 'name', 'description']
+        fields = ['topic', 'name', 'description']
         labels = {'name': 'RoomName'}
