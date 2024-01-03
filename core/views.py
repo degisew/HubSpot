@@ -28,9 +28,11 @@ def user_profile(request, pk):
     try:
         user = User.objects.get(id=pk)
         rooms = user.room.all()
+        room_messages = user.messages.all()
+        topics = Topic.objects.all()
     except User.DoesNotExist:
         raise ObjectDoesNotExist('User not found.')
-    context = {'user': user, 'rooms': rooms}
+    context = {'user': user, 'rooms': rooms, 'room_messages': room_messages, 'topics': topics}
     return render(request, 'core/user_profile.html', context)
 
 def login_page(request):
