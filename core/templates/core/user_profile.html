@@ -7,12 +7,17 @@
         display: grid;
         grid-template-columns: 1fr 3fr 1fr;
     }
+    .room-container {
+       border: 1px solid red;
+    }
 </style>
 <h1>{{user.username}}</h1>
 <div class="profile-container">
+<div>
     {% for room in  rooms%}
-    <div>{{room.name}}</div>
+    {{room.name}}
     {% endfor %}
+</div>
     <div>{% include "core/feed.html" %}</div>
     <div>{% include "core/activity.html" %}</div>
 </div>
