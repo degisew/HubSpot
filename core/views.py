@@ -27,7 +27,7 @@ def home(request):
 def user_profile(request, pk):
     try:
         user = User.objects.get(id=pk)
-        rooms = User.room.all()
+        rooms = user.room.all()
     except User.DoesNotExist:
         raise ObjectDoesNotExist('User not found.')
     context = {'user': user, 'rooms': rooms}
