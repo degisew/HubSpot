@@ -177,7 +177,6 @@ You can deploy this project using:
 
 ## 🔭 Future Features <a id="future-features"></a>
 
-- Integrate with the front-end app
 - Deploy and expose to the public
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
