@@ -84,7 +84,7 @@ After you're finished please remove all the comments and instructions!
 <!-- Features -->
 ### Key Features <a id="key-features"></a>
 
-- **Users can create a room and discuss**
+- **Users can create a room and discuss whit others**
 - **Users can connect with friends**
 - **Hosts can create, delete, update their own rooms and messages**
 - **Users can check recent activities n the room**
