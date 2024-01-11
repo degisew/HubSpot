@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="activities__boxContent">
-            <small>replied to "{{message.room}}"</small>
+            <small>replied to "<a href="{% url "room" message.room.id %}">{{message.room}}</a>"</small>
           <div class="activities__boxRoomContent">
             <p>{{message.body}}</p>
           </div>
