@@ -116,6 +116,8 @@ def delete_message(request, pk):
         raise ObjectDoesNotExist('Message not found.')
     return render(request, 'core/delete.html', {'data': message})
 
+def update_user(request):
+    return render(request, 'core/update-user.html')
 
 def login_page(request):
     if request.user.is_authenticated:
