@@ -23,7 +23,7 @@
             {% endif %}
           </div>
           <div class="profile__about">
-            <h3>About</h3>
+            <h3>Bio</h3>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur illo tenetur
               facilis sunt nemo debitis quisquam hic atque aut? Ducimus alias placeat optio
@@ -34,7 +34,7 @@
 
         <div class="roomList__header">
           <div>
-            <h2>Study Rooms Hosted by {{room.host.username}}</a>
+            <h2>Study Rooms Hosted by {{user.username}}</a>
             </h2>
           </div>
         </div>
@@ -49,7 +49,7 @@
               <span>@{{room.host.username}}</span>
             </a>
             <div class="roomListRoom__actions">
-              <span>3 days ago</span>
+              <span>{{ room.created_at|timesince }}</span>
 
             </div>
           </div>
@@ -77,7 +77,7 @@
                   d="M12 16c3.859 0 7-3.141 7-7s-3.141-7-7-7c-3.859 0-7 3.141-7 7s3.141 7 7 7zM12 4c2.757 0 5 2.243 5 5s-2.243 5-5 5-5-2.243-5-5c0-2.757 2.243-5 5-5z">
                 </path>
               </svg>
-              5.3k Joined
+              {{ room.participants.count }} Joined
             </a>
             <p class="roomListRoom__topic">{{ room.topic.name }}</p>
           </div>
