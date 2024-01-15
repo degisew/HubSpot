@@ -10,14 +10,15 @@
       <div class="layout__body">
         <h2 class="auth__tagline">Find your study partner</h2>
 
-        <form class="form" action="#">
+        <form class="form" action="" method="POST">
+          {% csrf_token %}
           <div class="form__group form__group">
             <label for="room_name">Username</label>
             <input
               id="username"
               name="username"
               type="text"
-              placeholder="e.g. dagi"
+              placeholder="e.g. john"
             />
           </div>
           <div class="form__group">
