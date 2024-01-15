@@ -1,15 +1,9 @@
-{% comment %} <form action="{% url 'home' %}" method="GET">
-  <input type="text" name="qs" placeholder="Search rooms..." /><input
-    type="submit"
-    value="search"
-  />
-</form> {% endcomment %}
 {% load static %}
 <header class="header header--loggedIn">
   <div class="container">
     <a href="{% url "home" %}" class="header__logo">
       <img src="{% static "images/logo.svg" %}" />
-      <h1>StudyBuddy</h1>
+      <h1>Study</h1>
     </a>
     <form class="header__search" action="{% url "home" %}">
       <label>
@@ -72,12 +66,3 @@
     </nav>
   </div>
 </header>
-
-
-
-{% if request.user.is_authenticated %}
-<p> Hello {{request.user}}
-<a href="{% url 'logout' %}">Logout</a>
-{% else %}
-<a href="{% url 'login' %}">Login</a>
-{% endif %}
