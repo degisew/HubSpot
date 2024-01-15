@@ -129,7 +129,13 @@ def update_user(request):
     return render(request, 'core/update-user.html', context)
 
 def topics_page(request):
-    return render(request, 'core/mobile_topics.html')
+    QS = request.GET.get('qs')
+    query_string = QS if QS != None else ''
+    topics = Topic.objects.filter(name=query_string)
+    context = {'topics': topics}
+    return render(request, 'core/mobile_topics.html', context)
+
+
 def login_page(request):
     if request.user.is_authenticated:
         return redirect('home')
