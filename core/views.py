@@ -128,6 +128,8 @@ def update_user(request):
             return redirect('user-profile', user.id)
     return render(request, 'core/update-user.html', context)
 
+def topics_page(request):
+    return render(request, 'core/mobile_topics.html')
 def login_page(request):
     if request.user.is_authenticated:
         return redirect('home')

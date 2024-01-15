@@ -2,7 +2,6 @@
 <main class="layout layout--3">
   <div class="container">
     {% include "core/topics.html" %}
-    <!-- Room List Start -->
     <div class="roomList">
       <div class="mobile-menu">
         <form class="header__search" action="{% url 'home' %}">
@@ -23,7 +22,7 @@
           </label>
         </form>
         <div class="mobile-menuItems">
-          <a class="btn btn--main btn--pill" href="#">Browse Topics</a>
+          <a class="btn btn--main btn--pill" href="{% url 'topics' %}">Browse Topics</a>
           <a class="btn btn--main btn--pill" href="#">Recent Activities</a>
         </div>
       </div>
@@ -50,11 +49,7 @@
       </div>
       {% include "core/feed.html" %}
     </div>
-    <!-- Room List End -->
-
-    <!-- Activities Start -->
       {% include "core/activity.html" %}
-    <!-- Activities End -->
   </div>
 </main>
 {% endblock content %}
