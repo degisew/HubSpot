@@ -10,7 +10,7 @@ from django.db.models import Q
 from .models import Message, Room, Topic
 from .forms import RoomForm, UserForm
 
-
+@login_required(login_url='login')
 def home(request):
     QS = request.GET.get('qs')
     query_string = QS if QS != None else ''
@@ -27,7 +27,7 @@ def home(request):
                'room_count': room_count, 'room_messages': room_messages}
     return render(request, 'core/home.html', context)
 
-
+@login_required(login_url='login')
 def user_profile(request, pk):
     try:
         user = User.objects.get(id=pk)
@@ -40,7 +40,7 @@ def user_profile(request, pk):
                'room_messages': room_messages, 'topics': topics}
     return render(request, 'core/user_profile.html', context)
 
-
+@login_required(login_url='login')
 def room(request, pk):
     try:
         room = Room.objects.get(id=pk)
