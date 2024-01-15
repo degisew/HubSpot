@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth import models, login, logout, authenticate
 from django.db.models import Q
 from .models import Message, Room, Topic
-from .forms import RoomForm
+from .forms import RoomForm, UserForm
 
 
 def home(request):
@@ -46,7 +46,6 @@ def room(request, pk):
         room = Room.objects.get(id=pk)
         room_messages = room.messages.all().order_by('-created_at')
         participants = room.participants.all()
-        print('###############', participants)
         context = {'room': room, 'room_messages': room_messages,
                    'participants': participants}
         if request.method == 'POST':
@@ -116,8 +115,18 @@ def delete_message(request, pk):
         raise ObjectDoesNotExist('Message not found.')
     return render(request, 'core/delete.html', {'data': message})
 
+
+@login_required(login_url='login')
 def update_user(request):
-    return render(request, 'core/update-user.html')
+    user = request.user
+    form = UserForm(instance=user)
+    context = {'form': form}
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('user-profile', user.id)
+    return render(request, 'core/update-user.html', context)
 
 def login_page(request):
     if request.user.is_authenticated:
