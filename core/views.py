@@ -19,7 +19,7 @@ def home(request):
         Q(name__icontains=query_string) |
         Q(description__icontains=query_string)
     )
-    topics = Topic.objects.all()
+    topics = Topic.objects.all()[:4]
     room_count = rooms.count()
     room_messages = Message.objects.filter(
         Q(room__topic__name__icontains=query_string)).order_by('-created_at')
@@ -134,6 +134,14 @@ def topics_page(request):
     topics = Topic.objects.filter(name__icontains=query_string)
     context = {'topics': topics}
     return render(request, 'core/mobile_topics.html', context)
+
+def activities_page(request):
+    QS = request.GET.get('qs')
+    query_string = QS if QS != None else ''
+    room_messages = Message.objects.filter(
+        Q(room__topic__name__icontains=query_string)).order_by('-created_at')
+    context = {'room_messages': room_messages}
+    return render(request, 'core/mobile_activity.html', context)
 
 
 def login_page(request):
