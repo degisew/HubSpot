@@ -131,7 +131,7 @@ def update_user(request):
 def topics_page(request):
     QS = request.GET.get('qs')
     query_string = QS if QS != None else ''
-    topics = Topic.objects.filter(name=query_string)
+    topics = Topic.objects.filter(name__icontains=query_string)
     context = {'topics': topics}
     return render(request, 'core/mobile_topics.html', context)
 
