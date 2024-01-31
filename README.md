@@ -54,8 +54,8 @@ After you're finished please remove all the comments and instructions!
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 DISCORD CLONE <a id="about-project"></a>
- **DISCORD CLONE** is a real-time chat application using Django and Python, inspired by Discord. This project aims to replicate some of the key features of Discord, allowing users to create and join chat rooms, send and receive messages in real-time, and manage user accounts. Implemented features such as text messaging, user authentication, roles, and permissions.
+# 📖 HubSpot <a id="about-project"></a>
+ **HubSpot** is a real-time chat application using Django and Python, inspired by Discord. This project aims to replicate some of the key features of Discord, allowing users to create and join chat rooms, send and receive messages in real time, and manage user accounts. Implemented text messaging, user authentication, roles, and permissions.
 
 <a name="readme-top"></a>
 
@@ -84,10 +84,10 @@ After you're finished please remove all the comments and instructions!
 <!-- Features -->
 ### Key Features <a id="key-features"></a>
 
-- **Users can create a room and discuss whit others**
+- **Users can create a room and discuss with others**
 - **Users can connect with friends**
-- **Hosts can create, delete, update their own rooms and messages**
-- **Users can check recent activities n the room**
+- **Hosts can create, delete, and update their rooms and messages**
+- **Users can check recent activities in the room**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -115,19 +115,19 @@ To get a local copy up and running follow these simple example steps.
 
 2. Clone this repo in your terminal or git bash using the command
 ```sh
-  cd discord-clone
-  git clone https://github.com/degisew/discord-clone.git
+  cd HubSpot
+  git clone https://github.com/degisew/HubSpot.git
 ```
 
 3. Run the following command to install all the necessary dependencies
 
  ```sh
-  cd discord-clone
+  cd HubSpot
   pip install pipenv
   pipenv install    # This will create a virtual env't and install dependencies in the virtual env't.
 ``` 
 
-4. Navigate to the folder called discord-clone/ and open this project using your editor
+4. Navigate to the folder called HubSpot/ and open this project using your editor
 
 ### Usage
 To run the project, first activate your virtual environment:
@@ -138,7 +138,7 @@ To run the project, first activate your virtual environment:
 Once you have activated, execute the following command to run the server:
 
 ```sh
-cd discord-clone
+cd HubSpot
 
 For Mac/Linux run:
  python3 manage.py runserver
@@ -148,7 +148,7 @@ For Windows run:
 ```
 - This above command will start the Django server in your browser
 
-Runs the app in the development mode.\
+It runs the app in the development mode.\
 Open [http://localhost:8000](http://localhost:8000) to view it in your browser.
 
 ### Deployment
@@ -187,7 +187,7 @@ You can deploy this project using:
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/degisew/discord-clone/issues/).
+Feel free to check the [issues page](https://github.com/degisew/HubSpot/issues/).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -212,7 +212,7 @@ I want to thank all my supporters.
 
 ## 📝 License <a id="license"></a>
 
-This project is [MIT](https://github.com/degisew/discord-clone/blob/dev/LICENSE) licensed.
+This project is [MIT](https://github.com/degisew/HubSpot/blob/dev/LICENSE) licensed.
 
 _NOTE: we recommend using the [MIT license](https://choosealicense.com/licenses/mit/) - you can set it up quickly by [using templates available on GitHub](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository). You can also use [any other license](https://choosealicense.com/licenses/) if you wish._
 
