@@ -11,9 +11,6 @@ admin.site.register(Message)
 admin.site.register(Topic)
 
 
-admin.site.site_title = _(
-    env("APP_TITLE", cast=str, default="Event Ticketing"))
-admin.site.site_header = _(
-    env("APP_TITLE", cast=str, default="Event Ticketing"))
-admin.site.index_title = _(
-    env("INDEX_TITLE", cast=str, default="Event Ticketing"))
+admin.site.site_title = _(env("APP_TITLE", cast=str, default="Event Ticketing"))
+admin.site.site_header = _(env("APP_TITLE", cast=str, default="Event Ticketing"))
+admin.site.index_title = _(env("INDEX_TITLE", cast=str, default="Event Ticketing"))

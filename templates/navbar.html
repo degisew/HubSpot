@@ -2,7 +2,7 @@
 <header class="header header--loggedIn">
     <div class="container">
         <a href="{% url "home" %}" class="header__logo">
-            <img src="{% static "images/logo.svg" %}" />
+            <img src="{% static "images/logo.svg" %}" height="" width="" alt="logo" />
             <h1>Study</h1>
         </a>
         <form class="header__search" action="{% url "home" %}">
@@ -25,7 +25,10 @@
                 <div class="header__user">
                     <a href="{% url 'user-profile' request.user.id %}">
                         <div class="avatar avatar--medium active">
-                            <img src="https://randomuser.me/api/portraits/men/37.jpg" />
+                            <img src="https://randomuser.me/api/portraits/men/37.jpg"
+                                 height=""
+                                 width=""
+                                 alt="avatar" />
                         </div>
                         <p>
                             {{ request.user.username }}<span>@{{ request.user }}</span>
@@ -45,7 +48,10 @@
             {% else %}
                 <!-- Not Logged In -->
                 <a href="{% url "login" %}">
-                    <img src="{% static 'images/avatar.svg' %}" />
+                    <img src="{% static 'images/avatar.svg' %}"
+                         height=""
+                         width=""
+                         alt="svg_logo" />
                     <p>Login</p>
                 </a>
             {% endif %}
