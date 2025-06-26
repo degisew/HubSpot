@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="delete">
+    <h3>Are you sure you want to delete the {{data}}?</h3>
+    <div class="btn-actions">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Confirm">
+            <a href="{{request.META.HTTP_REFERER}}">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock%}
