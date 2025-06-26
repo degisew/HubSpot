@@ -10,37 +10,62 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
+import environ
 from pathlib import Path
+from django.utils.translation import gettext_lazy as _
+
+env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+# Take environment variables from .env file
+env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-j)cux+()4@e@m!x_^u6s_4ey#gta4%cj)m!yhdki93edes^6eo'
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG", default=True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env("ALLOWED_HOSTS", default=["*"], cast=list)
+
+ENV = env("ENV", default="development")
+
+WSGI_APPLICATION = "config.wsgi.application"
+
+# AUTH_USER_MODEL = "account.User"
+
+ROOT_URLCONF = "config.urls"
+
+if not DEBUG:
+    ADMIN_URL = env("ADMIN_URL")
+else:
+    ADMIN_URL = env("ADMIN_URL", default="admin/")
 
 
 # Application definition
-
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    #custom apps
-    'core'
 ]
+
+THIRD_PARTY_APPS = []
+
+CUSTOM_APPS = [
+    "apps.core"
+]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + CUSTOM_APPS
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -51,8 +76,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-ROOT_URLCONF = 'discord.urls'
 
 TEMPLATES = [
     {
@@ -72,20 +95,18 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'discord.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'localhost',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'NAME': 'discord',
-        'PORT': '5432'
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": env("DB_HOST"),
+        "PORT": env("DB_PORT"),
+        "NAME": env("DB_NAME"),
+        "USER": env("DB_USER"),
+        "PASSWORD": env("DB_PASSWORD"),
     }
 }
 
@@ -113,11 +134,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = env("TIME_ZONE", cast=str, default="UTC")
+
+USE_TZ = env("USE_TZ", cast=bool, default=True)
 
 USE_I18N = True
 
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
